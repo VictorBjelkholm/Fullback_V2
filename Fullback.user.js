@@ -793,8 +793,8 @@ shortcut = {
 		        }
 	 	     }
 		});
-		if(debug)
-			$(window).unload( function () { alert("Bye now!"); } );
+		//if(debug)
+			//$(window).unload( function () { alert("Bye now!"); } );
 	});
 }
 
