@@ -466,7 +466,7 @@ shortcut = {
 				var aLink = $(this).attr('href');
 				if(aLink) {
 					if(aLink.indexOf("leave.php?u=") > 0) {
-						aLink = aLink.substring(38);
+						aLink = aLink.substring(13);
 						aLink = decodeURIComponent (aLink);
 						aLink = aLink.replace (/&amp;/gi, "&");
 						$(this).attr('href', aLink);
