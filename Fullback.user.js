@@ -772,23 +772,24 @@ shortcut = {
 
 		//Check if there is any updates
 		$.ajax({
-		     url:"https://www.flashback.org/sp29394165",
+		     url:"https://github.com/victorbjelkholm/Fullback_V2",
 		     success:function(versionRemote){
 		         // do stuff with json (in this case an array)
-		         versionRemote = $(versionRemote).find('#post_message_29394165').html();
-		         versionRemote = versionRemote.substr(versionRemote.length - 8);
+		         versionRemote = $(versionRemote).find('h1:last-child').html();
+		         /*versionRemote = versionRemote.substr(versionRemote.length - 8);
 		         versionRemote = versionRemote.replace(/\s+/g, " ");
-		         versionRemote = versionRemote.slice(0, -1);
+		         versionRemote = versionRemote.slice(0, -1);*/
 		         if(debug)
 		         	console.log('versionLocal: '+versionLocal+' | versionRemote: '+versionRemote);
 		         $('html').append('<div id="updateNotice" style="text-align: center; position: fixed; top: 200px; width: 150px; background-color: white; left: -200px; padding: 5px;"><h1 style="font-weight: bolder; font-size: 200%;">Uppdatering!</h1><p>Det finns en uppdatering tillgänglig för <a href="https://www.flashback.org/t1482213" target="_blank">Fullback</a></p><br/><p>Du har version '+versionLocal+' och nyaste versionen är '+versionRemote+'</p><br/><a href="https://github.com/VictorBjelkholm/Fullback_V2/raw/master/Fullback.user.js" target="_blank" style="font-size: 130%;">Uppdatera</a></div>');
-		         if(!(versionLocal == versionRemote)) {
+		        alert('Lokal:'+versionLocal+' | Fjärr:'+versionRemote);
+		        /*if(!(versionLocal == versionRemote)) {
 		         	 $('#updateNotice').animate({
 					    left: '0',
 					  }, 1000, function() {
 					    // Animation complete.
 					  });
-		        }
+		        }*/
 	 	     }
 		});
 	});

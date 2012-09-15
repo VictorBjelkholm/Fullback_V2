@@ -123,4 +123,4 @@ Första versionen.
 - Göra en länk till mina citerade inlägg i nuvarande tråd
 - Kunna trycka på en knapp för att visa bilder i tråden
 
-#0.2.0
+0.2.0
