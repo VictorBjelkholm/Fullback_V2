@@ -66,6 +66,12 @@ Lägger till en länk till toppen av sidan vid varje inlägg som du håller muse
 
 ##Version
 
+###0.2.0
+77% mindre källkod (från 119kb till 27kb)
+Bättre prestanda
+fixLinks är fixat för att fungera
+Använder VictorBjelkholm-kontot på Github istället för diggan
+
 ###0.1.3
 goToTop
 

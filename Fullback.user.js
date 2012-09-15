@@ -3,7 +3,7 @@
 // @namespace      flashback
 // @description    Skriptet för dig som önskar att Flashback var så mycket mera
 // @include        https://www.flashback.org/*
-// @version        0.1.3
+// @version        0.2.0
 // ==/UserScript==
 
 /*! jQuery v1.7.1 jquery.com | jquery.org/license */
@@ -256,10 +256,10 @@ shortcut = {
 
 
 	//Local version
-	var versionLocal = "0.1.3";
+	var versionLocal = "0.2.0";
 
 	// When page have loaded
-	$(document).ready(function() {
+	$(document).ready(function() {2
 		if(debug)
 			console.log('DOM ready');
 	//Add mod toolbox option dialog
@@ -781,7 +781,7 @@ shortcut = {
 		         versionRemote = versionRemote.slice(0, -1);
 		         if(debug)
 		         	console.log('versionLocal: '+versionLocal+' | versionRemote: '+versionRemote);
-		         $('html').append('<div id="updateNotice" style="text-align: center; position: fixed; top: 200px; width: 150px; background-color: white; left: -200px; padding: 5px;"><h1 style="font-weight: bolder; font-size: 200%;">Uppdatering!</h1><p>Det finns en uppdatering tillgänglig för <a href="https://www.flashback.org/t1482213" target="_blank">Fullback</a></p><br/><p>Du har version '+versionLocal+' och nyaste versionen är '+versionRemote+'</p><br/><a href="https://github.com/diggan/Fullback_V2/raw/master/Fullback.user.js" target="_blank" style="font-size: 130%;">Uppdatera</a></div>');
+		         $('html').append('<div id="updateNotice" style="text-align: center; position: fixed; top: 200px; width: 150px; background-color: white; left: -200px; padding: 5px;"><h1 style="font-weight: bolder; font-size: 200%;">Uppdatering!</h1><p>Det finns en uppdatering tillgänglig för <a href="https://www.flashback.org/t1482213" target="_blank">Fullback</a></p><br/><p>Du har version '+versionLocal+' och nyaste versionen är '+versionRemote+'</p><br/><a href="https://github.com/VictorBjelkholm/Fullback_V2/raw/master/Fullback.user.js" target="_blank" style="font-size: 130%;">Uppdatera</a></div>');
 		         if(!(versionLocal == versionRemote)) {
 		         	 $('#updateNotice').animate({
 					    left: '0',
@@ -791,8 +791,6 @@ shortcut = {
 		        }
 	 	     }
 		});
-		//if(debug)
-			//$(window).unload( function () { alert("Bye now!"); } );
 	});
 }
 
