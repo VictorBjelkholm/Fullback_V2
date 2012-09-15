@@ -1,0 +1,19 @@
+{
+    "name": "Fullback V2",
+    "version": "0.2.0",
+    "description": "Skriptet för dig som önskar att Flashback var så mycket mera",
+    "manifest_version": 2,
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "content_scripts": [
+        {
+             "matches": ["https://www.flashback.org/*"],
+            "js": [
+                "Fullback.user.js"
+            ]
+        }
+    ]
+}

@@ -122,3 +122,5 @@ Första versionen.
 - Möjlighet att söka på valfri term med samma funktionalitet som checkQuote
 - Göra en länk till mina citerade inlägg i nuvarande tråd
 - Kunna trycka på en knapp för att visa bilder i tråden
+
+#0.2.0
