@@ -12,7 +12,7 @@ function addJQuery(callback) {
   script.setAttribute("src", "https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js");
   script.addEventListener('load', function() {
     var script = document.createElement("script");
-    script.textContent = "(" + callback.toString() + ")();";
+    script.textContent = "jQuery.noConflict();(" + callback.toString() + ")();";
     document.body.appendChild(script);
   }, false);
   document.body.appendChild(script);
@@ -385,9 +385,7 @@ shortcut = {
 		//Hide GIF-images
 		//TODO make it work in Chrome also
 		if($.cookie('stopGif') == "true") {
-			$('img').each(function(){
-				window.stop();
-			});
+			window.stop();
 		}
 
 		//Check for new PMs
@@ -471,7 +469,7 @@ shortcut = {
 						aLink = aLink.replace (/&amp;/gi, "&");
 						$(this).attr('href', aLink);
 						if(debug)
-							console.log("Fixed this link: "+$(this).prop('href')+" to this: "+aLink);
+							console.log("Fixed this link: "+$(this).attr('href')+" to this: "+aLink);
 					}
 
 				}
@@ -574,7 +572,7 @@ shortcut = {
 					if(!(currentPost >= lastPost)) {
 						currentPost++;
 						$('html,body').animate({
-							scrollTop: $('a[id^="postcount"]:contains('+currentPost+')').offset().top-30},
+							scrollTop: $('a[id^="postcount"]:contains('+currentPost+')').offset().top-55},
 						'slow');
 						$('a[id^="postcount"]:contains('+(currentPost-1)+')').css('color','');
 						$('a[id^="postcount"]:contains('+currentPost+')').css('color','red');
@@ -588,7 +586,7 @@ shortcut = {
 						if(debug)
 							console.log(currentPost);
 						$('html,body').animate({
-							scrollTop: $('a[id^="postcount"]:contains('+currentPost+')').offset().top-30},
+							scrollTop: $('a[id^="postcount"]:contains('+currentPost+')').offset().top-55},
 						'slow');
 						$("a:contains("+(currentPost+1)+")").css('color','');
 						$("a:contains("+currentPost+")").css('color','red');
@@ -602,8 +600,8 @@ shortcut = {
 					//console.log(currentPost+' have '+quoteLink+' as quoteLink');
 				});
 				shortcut.add("Ctrl+S",function() {
-					alert('CTRL + S');
 					ev.preventDefault();
+					alert('CTRL + S');
 				});
 			}
 			currentPage = location.pathname;
