@@ -66,6 +66,12 @@ Lägger till en länk till toppen av sidan vid varje inlägg som du håller muse
 
 ##Version
 
+###0.2.1
+Gick inte att öppna inställningar
+Heta ämnen fungerade efter byte till aktuella ämnen
+Inställningarna visas och göms lite snabbare
+Kommenterade ut meddelandet om ny version eftersom det inte fungerar längre
+
 ###0.2.0
 77% mindre källkod (från 119kb till 27kb)
 Bättre prestanda
