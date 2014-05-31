@@ -482,7 +482,7 @@ shortcut = {
 			currentPage = currentPage.substring(0,2);
 			if((currentPage == "/p") || (currentPage == "/t")) {
 				var threadId = $('.navbar strong a:first').attr('href').substring(2);
-				var profileId = $('.top-menu-sub li:nth-child(2) a').attr('href').substring(2);
+				var profileId = $('.top-menu-main li.l0 .top-menu-sub li.l2:nth-child(2) a').attr('href').substring(2);
 				if(debug) {
 					console.log('Current threadId: '+threadId);
 					console.log('Current profileId: '+profileId);
