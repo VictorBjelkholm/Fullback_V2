@@ -3,7 +3,7 @@
 // @namespace      flashback
 // @description    Skriptet för dig som önskar att Flashback var så mycket mera
 // @include        https://www.flashback.org/*
-// @version        0.2.0
+// @version        0.2.1
 // ==/UserScript==
 
 /*! jQuery v1.7.1 jquery.com | jquery.org/license */
@@ -256,7 +256,7 @@ shortcut = {
 
 
 	//Local version
-	var versionLocal = "0.2.0";
+	var versionLocal = "0.2.1";
 
 	// When page have loaded
 	$(document).ready(function() {2
