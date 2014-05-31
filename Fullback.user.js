@@ -630,8 +630,8 @@ shortcut = {
 			if(debug)
 				console.log('Mod Toolbox settings dialog opened');
 			$('body').css('overflow', 'hidden');
-			$('#backgroundCover').fadeIn('Slow', function(){
-				$('#settingsDialog').fadeIn('Slow');
+			$('#backgroundCover').fadeIn('fast', function(){
+				$('#settingsDialog').fadeIn('fast');
 			});
 		});
 
@@ -701,8 +701,8 @@ shortcut = {
 				$.cookie('goToTop', 'false', { expires: 1000 });
 			}
 
-			$('#settingsDialog').fadeOut('Slow', function(){
-				$('#backgroundCover').fadeOut('Slow', function(){
+			$('#settingsDialog').fadeOut('fast', function(){
+				$('#backgroundCover').fadeOut('fast', function(){
 					$('body').css('overflow', 'auto');
 					location.reload();
 				});
@@ -763,8 +763,8 @@ shortcut = {
 		});
 
 		$('#forceCloseToolboxSettings').click(function(){
-			$('#settingsDialog').fadeOut('Slow', function(){
-				$('#backgroundCover').fadeOut('Slow', function(){
+			$('#settingsDialog').fadeOut('fast', function(){
+				$('#backgroundCover').fadeOut('fast', function(){
 					$('body').css('overflow', 'auto');
 				});
 			});
