@@ -771,6 +771,8 @@ shortcut = {
 		});
 
 		//Check if there is any updates
+		// Tries to parse the forum - very brittle and the current post is not what this code expects.
+		/*
 		$.ajax({
 		     url:"https://www.flashback.org/u180540",
 		     success:function(versionRemote){
@@ -788,6 +790,7 @@ shortcut = {
 		        }
 	 	     }
 		});
+		*/
 	});
 }
 
