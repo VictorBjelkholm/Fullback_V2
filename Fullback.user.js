@@ -490,31 +490,36 @@ shortcut = {
 				$('tr[valign^="bottom"]:last').prepend('<td class="alt1" style="white-space:nowrap;padding:0 !important;"><a href="https://www.flashback.org/find_posts_by_user.php?userid='+profileId+'&threadid='+threadId+'" class="doaction">Mina inlägg i denna tråd</a></td>');
 			}
 		}
-		//Enables users to mod heta-amnen
+		//Enables users to mod aktuella-amnen
 		if($.cookie('hetaAmnenMod') == "true") {
 			if(debug)
-				console.log('Heta amnen mod active');
+				console.log('Aktuella amnen mod active');
 			var currentPage = location.pathname;
-			if(currentPage == "/heta-amnen"){
-				var hetaAmnenModVar = 'Kryssa i de kategorier du vill visa.\
-					<input type="checkbox" id="aktuellt" class="hetaAmnenMod" checked="checked"/>Aktuella händelser\
+			if(currentPage == "/aktuella-amnen"){
+				var hetaAmnenModVar = '<p>Kryssa i de kategorier du vill visa.</p>\
+					<input type="checkbox" id="nyheter" class="hetaAmnenMod" checked="checked"/>Nyheter\
 					<input type="checkbox" id="ovrigt" class="hetaAmnenMod" checked="checked"/>Övriga\
-					<input type="checkbox" id="aldre" class="hetaAmnenMod" checked="checked"/>äldre än en månad\
+					<input type="checkbox" id="aldre_vecka" class="hetaAmnenMod" checked="checked"/>Äldre än en vecka\
+					<input type="checkbox" id="aldre_ar" class="hetaAmnenMod" checked="checked"/>Äldre än ett år\
 				<hr/>';
 
-				$('div[style="padding-top:10px"]').prepend(hetaAmnenModVar);
+				$(hetaAmnenModVar).insertBefore('table.threadslist:first');
 				
-				if($.cookie('aktuellt') == "false") {
-					$('#aktuellt').attr('checked',null);
-					$('#threadslist:nth-child(1)').hide();
+				if($.cookie('nyheter') == "false") {
+					$('#nyheter').attr('checked',null);
+					$('table.threadslist:eq(0)').hide();
 				}
 				if($.cookie('ovrigt') == "false"){
 					$('#ovrigt').attr('checked',null);
-					$('#threadslist:nth-child(2)').hide();
+					$('table.threadslist:eq(1)').hide();
 				}
-				if($.cookie('aldre') == "false"){
-					$('#aldre').attr('checked',null);
-					$('#threadslist:nth-child(3)').hide();
+				if($.cookie('aldre_vecka') == "false"){
+					$('#aldre_vecka').attr('checked',null);
+					$('table.threadslist:eq(2)').hide();
+				}
+				if($.cookie('aldre_ar') == "false"){
+					$('#aldre_vecka').attr('checked',null);
+					$('table.threadslist:eq(3)').hide();
 				}
 			}
 		}
@@ -720,40 +725,47 @@ shortcut = {
 				
 				switch(hetaAmnenModCheckbox)
 				{
-				case "aktuellt":
-					$.cookie('aktuellt', 'true');
-					$('#threadslist:nth-child(1)').show();
+				case "nyheter":
+					$.cookie('nyheter', 'true');
+					$('table.threadslist:eq(0)').show();
 					break;
 				case "ovrigt":
 					$.cookie('ovrigt', 'true');
-					$('#threadslist:nth-child(2)').show();
+					$('table.threadslist:eq(1)').show();
 					break;
-				case "aldre":
-					$.cookie('aldre', 'true');
-					$('#threadslist:nth-child(3)').show();
+				case "aldre_vecka":
+					$.cookie('aldre_vecka', 'true');
+					$('table.threadslist:eq(2)').show();
+					break;
+				case "aldre_ar":
+					$.cookie('aldre_ar', 'true');
+					$('table.threadslist:eq(3)').show();
 					break;
 				default:
 					if(debug)
 						console.log('Fel i hetaAmnenMod');
 				}
-				window.scrollTo(0, document.body.scrollHeight);
 			} else {
 				if(debug)
 					console.log('Unchecked '+hetaAmnenModCheckbox);
 				
 				switch(hetaAmnenModCheckbox)
 				{
-				case "aktuellt":
-					$.cookie('aktuellt', 'false');
-					$('#threadslist:nth-child(1)').hide();
+				case "nyheter":
+					$.cookie('nyheter', 'false');
+					$('table.threadslist:eq(0)').hide();
 					break;
 				case "ovrigt":
 					$.cookie('ovrigt', 'false');
-					$('#threadslist:nth-child(2)').hide();
+					$('table.threadslist:eq(1)').hide();
 					break;
-				case "aldre":
-					$.cookie('aldre', 'false');
-					$('#threadslist:nth-child(3)').hide();
+				case "aldre_vecka":
+					$.cookie('aldre_vecka', 'false');
+					$('table.threadslist:eq(2)').hide();
+					break;
+				case "aldre_ar":
+					$.cookie('aldre_ar', 'false');
+					$('table.threadslist:eq(3)').hide();
 					break;
 				default:
 					if(debug)
