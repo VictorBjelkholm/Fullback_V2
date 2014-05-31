@@ -284,7 +284,7 @@ shortcut = {
 	<p>Detta är inställningar som har med designen att göra</p>\
 	<input type="checkbox" id="removeTop"/> Ta bort topp<br/>\
 	<input type="checkbox" id="floatingTabs"/> Meny-rad följer scroll<br/>\
-	<input type="checkbox" id="hetaAmnenMod"/> Heta Ämnen-väljare<br/>\
+	<input type="checkbox" id="hetaAmnenMod"/> Aktuella Ämnen-väljare<br/>\
 	</div>\
 	<div id="tab-3" style="float: left; margin-left: 5px;">\
 	<h1 style="font-weight: bolder; font-size: 120%;">Uppdateringar</h1>\
