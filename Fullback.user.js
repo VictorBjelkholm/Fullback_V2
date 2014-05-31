@@ -329,13 +329,13 @@ shortcut = {
 	});
 
 		//Add mod toolbox href
-		$('.top-menu-sub').append('<li class="l2"><a href="#" id="openToolboxSettings">Fullback</a></li>');
+		$('.top-menu-main').append('<li class="l1"><a href="#" id="openToolboxSettings">Fullback</a></li>');
 
 		//Intro popup
 		if($.cookie('intro') == null) {
 			if(debug)
 				console.log('Första gången');
-			var controlPosition = $('ul.top-menu-main li.l0').offset();
+			var controlPosition = $('#openToolboxSettings').offset();
 			var controlLeft = controlPosition.left - 30;
 			if(debug)
 				console.log(controlPosition);
