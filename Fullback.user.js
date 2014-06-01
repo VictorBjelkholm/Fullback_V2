@@ -50,7 +50,7 @@ shortcut = {
 		//The function to be called at keypress
 		var func = function(e) {
 			e = e || window.event;
-			
+
 			if(opt['disable_in_input']) { //Don't enable shortcut keys in Input, Textarea fields
 				var element;
 				if(e.target) element=e.target;
@@ -59,19 +59,19 @@ shortcut = {
 
 				if(element.tagName == 'INPUT' || element.tagName == 'TEXTAREA') return;
 			}
-	
+
 			//Find Which key is pressed
 			if (e.keyCode) code = e.keyCode;
 			else if (e.which) code = e.which;
 			var character = String.fromCharCode(code).toLowerCase();
-			
+
 			if(code == 188) character=","; //If the user presses , when the type is onkeydown
 			if(code == 190) character="."; //If the user presses , when the type is onkeydown
 
 			var keys = shortcut_combination.split("+");
 			//Key Pressed - counts the number of valid keypresses - if it is same as the number of keys, the shortcut function is invoked
 			var kp = 0;
-			
+
 			//Work around for stupid Shift key bug created by using lowercase - as a result the shift+num combination was broken
 			var shift_nums = {
 				"`":"~",
@@ -103,7 +103,7 @@ shortcut = {
 				'return':13,
 				'enter':13,
 				'backspace':8,
-	
+
 				'scrolllock':145,
 				'scroll_lock':145,
 				'scroll':145,
@@ -113,28 +113,28 @@ shortcut = {
 				'numlock':144,
 				'num_lock':144,
 				'num':144,
-				
+
 				'pause':19,
 				'break':19,
-				
+
 				'insert':45,
 				'home':36,
 				'delete':46,
 				'end':35,
-				
+
 				'pageup':33,
 				'page_up':33,
 				'pu':33,
-	
+
 				'pagedown':34,
 				'page_down':34,
 				'pd':34,
-	
+
 				'left':37,
 				'up':38,
 				'right':39,
 				'down':40,
-	
+
 				'f1':112,
 				'f2':113,
 				'f3':114,
@@ -148,19 +148,19 @@ shortcut = {
 				'f11':122,
 				'f12':123
 			}
-	
-			var modifiers = { 
+
+			var modifiers = {
 				shift: { wanted:false, pressed:false},
 				ctrl : { wanted:false, pressed:false},
 				alt  : { wanted:false, pressed:false},
 				meta : { wanted:false, pressed:false}	//Meta is Mac specific
 			};
-                        
+
 			if(e.ctrlKey)	modifiers.ctrl.pressed = true;
 			if(e.shiftKey)	modifiers.shift.pressed = true;
 			if(e.altKey)	modifiers.alt.pressed = true;
 			if(e.metaKey)   modifiers.meta.pressed = true;
-                        
+
 			for(var i=0; k=keys[i],i<keys.length; i++) {
 				//Modifiers
 				if(k == 'ctrl' || k == 'control') {
@@ -179,7 +179,7 @@ shortcut = {
 					modifiers.meta.wanted = true;
 				} else if(k.length > 1) { //If it is a special key
 					if(special_keys[k] == code) kp++;
-					
+
 				} else if(opt['keycode']) {
 					if(opt['keycode'] == code) kp++;
 
@@ -187,25 +187,25 @@ shortcut = {
 					if(character == k) kp++;
 					else {
 						if(shift_nums[character] && e.shiftKey) { //Stupid Shift key bug created by using lowercase
-							character = shift_nums[character]; 
+							character = shift_nums[character];
 							if(character == k) kp++;
 						}
 					}
 				}
 			}
-			
-			if(kp == keys.length && 
+
+			if(kp == keys.length &&
 						modifiers.ctrl.pressed == modifiers.ctrl.wanted &&
 						modifiers.shift.pressed == modifiers.shift.wanted &&
 						modifiers.alt.pressed == modifiers.alt.wanted &&
 						modifiers.meta.pressed == modifiers.meta.wanted) {
 				callback(e);
-	
+
 				if(!opt['propagate']) { //Stop the event
 					//e.cancelBubble is supported by IE - this will kill the bubbling process.
 					e.cancelBubble = true;
 					e.returnValue = false;
-	
+
 					//e.stopPropagation works in Firefox.
 					if (e.stopPropagation) {
 						e.stopPropagation();
@@ -216,8 +216,8 @@ shortcut = {
 			}
 		}
 		this.all_shortcuts[shortcut_combination] = {
-			'callback':func, 
-			'target':ele, 
+			'callback':func,
+			'target':ele,
 			'event': opt['type']
 		};
 		//Attach the function with the event
@@ -300,6 +300,7 @@ shortcut = {
 	<input type="checkbox" id="fixLinks"/> Fixa utgående länkar<br/>\
 	<input type="checkbox" id="myPostInThread"/> Visa länk till alla mina inlägg i nuvarande tråd<br/>\
 	<input type="checkbox" id="showImages" title="Du måste använda fixLinks tillsammans med showImages"/> Visa bilder<br/>\
+	<input type="checkbox" id="showImagesMinDup"/> Visa dublettbilder i minatyr<br/>\
 	<input type="checkbox" id="keyShorts"/> Aktivera tangentbords-styrning<br/>\
 	<input type="checkbox" id="goToTop"/> Aktivera "Gå till toppen"-länk vid inlägg<br/>\
 	</div>\
@@ -316,7 +317,7 @@ shortcut = {
 	$('#tabs div:first').show();
 	$('#tabs ul li:first').addClass('active');
 	$('#tabs ul li:first').css('font-weight', 'bolder');
-	 
+
 	$('#tabs ul li a').click(function(){
 		$('#tabs ul li').css('font-weight','');
 		$('#tabs ul li').removeClass('active');
@@ -367,16 +368,18 @@ shortcut = {
 		if($.cookie('fixLinks') == "true")
 			$('#fixLinks').attr('checked','checked');
 		if($.cookie('myPostInThread') == "true")
-			$('#myPostInThread').attr('checked','checked');	
+			$('#myPostInThread').attr('checked','checked');
 		if($.cookie('hetaAmnenMod') == "true")
-			$('#hetaAmnenMod').attr('checked','checked');	
+			$('#hetaAmnenMod').attr('checked','checked');
 		if($.cookie('showImages') == "true")
-			$('#showImages').attr('checked','checked');	
+			$('#showImages').attr('checked','checked');
+		if($.cookie('showImagesMinDup') == "true")
+			$('#showImagesMinDup').attr('checked','checked');
 		if($.cookie('keyShorts') == "true")
 			$('#keyShorts').attr('checked','checked');
 		if($.cookie('goToTop') == "true")
 			$('#goToTop').attr('checked','checked');
-			
+
 
 		//Remove #top
 		if($.cookie('removeTop') == "true")
@@ -504,7 +507,7 @@ shortcut = {
 				<hr/>';
 
 				$(hetaAmnenModVar).insertBefore('table.threadslist:first');
-				
+
 				if($.cookie('nyheter') == "false") {
 					$('#nyheter').attr('checked',null);
 					$('table.threadslist:eq(0)').hide();
@@ -523,12 +526,26 @@ shortcut = {
 				}
 			}
 		}
-		//Show images in threads 
+		//Show images in threads
 		if($.cookie('showImages') == "true") {
 			if($.cookie('fixLinks') == "true") {
 				//alt1 post-right
 				var maxWidth = $('.post-right').width() - 20;
+				var seen = {};
 				$('a[href$="jpg"], a[href$="jpeg"], a[href$="png"], a[href$="gif"], a[href$="JPG"]').each(function() {
+
+					if( $.cookie('showImagesMinDup') == "true" && seen[$(this).attr('href')] ) {
+						if(debug)
+							console.log("Ignored duplicate");
+						$(this).html('<br/><img src="'+$(this).attr('href')+'" style="max-width: 50px;"/>').click({"url": $(this).attr('href')}, function(e) {
+							e.preventDefault();
+							$(this).find('img').css({"max-width": maxWidth+'px'}).click(function() {
+								window.open(e.data["url"]);
+							});
+						});
+						return true;
+					}
+
 					if(debug)
 						console.log($(this).css('color'));
 
@@ -538,10 +555,11 @@ shortcut = {
 					} else {
 						if(debug)
 							console.log('True '+$(this).attr("href"));
-						$(this).html('<br/><a href="'+$(this).attr('href')+'" target="_blank"><img src="'+$(this).attr('href')+'" style="max-width: '+maxWidth+'px;"/></a>'); 
+						$(this).html('<br/><a href="'+$(this).attr('href')+'" target="_blank"><img src="'+$(this).attr('href')+'" style="max-width: '+maxWidth+'px;"/></a>');
 						if(debug)
 							console.log('Fixed image link!'+$(this).attr('href'));
 					}
+					seen[$(this).attr('href')] = true;
 				});
 			}
 		}
@@ -695,11 +713,16 @@ shortcut = {
 			} else {
 				$.cookie('showImages', 'false', { expires: 1000 });
 			}
+			if ($('#showImagesMinDup').attr('checked')) {
+				$.cookie('showImagesMinDup', 'true', { expires: 1000 });
+			} else {
+				$.cookie('showImagesMinDup', 'false', { expires: 1000 });
+			}
 			if ($('#keyShorts').attr('checked')) {
 				$.cookie('keyShorts', 'true', { expires: 1000 });
 			} else {
 				$.cookie('keyShorts', 'false', { expires: 1000 });
-			} 
+			}
 			if ($('#goToTop').attr('checked')) {
 				$.cookie('goToTop', 'true', { expires: 1000 });
 			} else {
@@ -713,7 +736,7 @@ shortcut = {
 				});
 			});
 			if(debug)
-				console.log('Save and exit!');	
+				console.log('Save and exit!');
 		});
 
 		$(".hetaAmnenMod").change( function(){
@@ -722,7 +745,7 @@ shortcut = {
 			if($(this).is(':checked')) {
 				if(debug)
 					console.log('Checked '+hetaAmnenModCheckbox);
-				
+
 				switch(hetaAmnenModCheckbox)
 				{
 				case "nyheter":
@@ -748,7 +771,7 @@ shortcut = {
 			} else {
 				if(debug)
 					console.log('Unchecked '+hetaAmnenModCheckbox);
-				
+
 				switch(hetaAmnenModCheckbox)
 				{
 				case "nyheter":
