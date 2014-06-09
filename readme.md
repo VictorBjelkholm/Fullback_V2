@@ -66,43 +66,40 @@ Lägger till en länk till toppen av sidan vid varje inlägg som du håller muse
 
 ##Version
 
+###0.2.1
+- Gick inte att öppna inställningar
+- Heta ämnen fungerade efter byte till aktuella ämnen
+- Inställningarna visas och göms lite snabbare
+- Kommenterade ut meddelandet om ny version eftersom det inte fungerar längre
+- Visa dubblettbilder i miniatyr
+
 ###0.2.0
-77% mindre källkod (från 119kb till 27kb)
-Bättre prestanda
-fixLinks är fixat för att fungera
-Använder VictorBjelkholm-kontot på Github istället för diggan
+- 77% mindre källkod (från 119kb till 27kb)
+- Bättre prestanda
+- fixLinks är fixat för att fungera
+- Använder VictorBjelkholm-kontot på Github istället för diggan
 
 ###0.1.3
-goToTop
+- goToTop
 
 ###0.1.2
-Om du kör en gammal version så dyker det upp en liten popup och berättar att det finns en nyare version.
-Fixade bugg med & och fixLinks.
-Nu kan man ställa in hur ofta checkPM och checkQuote ska uppdateras
+- Om du kör en gammal version så dyker det upp en liten popup och berättar att det finns en nyare version.
+- Fixade bugg med & och fixLinks.
+- Nu kan man ställa in hur ofta checkPM och checkQuote ska uppdateras
 
 ###0.1.1
-Nytt är fixLinks, myPostInThread, hetaAmnenMod, showImages, keyShorts och ett antal buggfixar när det gäller checkQuote. Funktionen är dock inte helt failsafe ännu.
-
-En pil visar nu vart man hittar Fullback.
-
-Kakor är inte längre sessionskakor utan kakor som löper ut 1000 dagar frammåt.
-
-En ny länk i Fullback-dialogen finns nu. "Stäng" stänger dialogen utan att spara eller ladda om sidan.
-
-Bilder kan visas direkt i tråden.
-
-Man kan nu använda tangentbordet för att navigera runt i trådar.
-
-Finare inställningsdialog
+- Nytt är fixLinks, myPostInThread, hetaAmnenMod, showImages, keyShorts och ett antal buggfixar när det gäller checkQuote. Funktionen är dock inte helt failsafe ännu.
+- En pil visar nu vart man hittar Fullback.
+- Kakor är inte längre sessionskakor utan kakor som löper ut 1000 dagar frammåt.
+- En ny länk i Fullback-dialogen finns nu. "Stäng" stänger dialogen utan att spara eller ladda om sidan.
+- Bilder kan visas direkt i tråden.
+- Man kan nu använda tangentbordet för att navigera runt i trådar.
+- Finare inställningsdialog
 
 ###0.1
-Första versionen.
+- Första versionen.
 
 ##TODO
-
-- DONE Ändra vilka delar heta ämnen visar med checkboxes
-- DONE Visa en introduktion första gången man laddar Flashback när skriptet är installerat
-- DONE Visa bilder direkt i tråden eller visa med knapp
 
 - checkQuote ger felaktigt ut att nytt citat finns när det inte gör det
 - Funktion att dölja inlägg som understiger ett visst antal bokstäver

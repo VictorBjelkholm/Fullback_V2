@@ -3,7 +3,7 @@
 // @namespace      flashback
 // @description    Skriptet för dig som önskar att Flashback var så mycket mera
 // @include        https://www.flashback.org/*
-// @version        0.2.0
+// @version        0.2.1
 // ==/UserScript==
 
 /*! jQuery v1.7.1 jquery.com | jquery.org/license */
@@ -50,7 +50,7 @@ shortcut = {
 		//The function to be called at keypress
 		var func = function(e) {
 			e = e || window.event;
-			
+
 			if(opt['disable_in_input']) { //Don't enable shortcut keys in Input, Textarea fields
 				var element;
 				if(e.target) element=e.target;
@@ -59,19 +59,19 @@ shortcut = {
 
 				if(element.tagName == 'INPUT' || element.tagName == 'TEXTAREA') return;
 			}
-	
+
 			//Find Which key is pressed
 			if (e.keyCode) code = e.keyCode;
 			else if (e.which) code = e.which;
 			var character = String.fromCharCode(code).toLowerCase();
-			
+
 			if(code == 188) character=","; //If the user presses , when the type is onkeydown
 			if(code == 190) character="."; //If the user presses , when the type is onkeydown
 
 			var keys = shortcut_combination.split("+");
 			//Key Pressed - counts the number of valid keypresses - if it is same as the number of keys, the shortcut function is invoked
 			var kp = 0;
-			
+
 			//Work around for stupid Shift key bug created by using lowercase - as a result the shift+num combination was broken
 			var shift_nums = {
 				"`":"~",
@@ -103,7 +103,7 @@ shortcut = {
 				'return':13,
 				'enter':13,
 				'backspace':8,
-	
+
 				'scrolllock':145,
 				'scroll_lock':145,
 				'scroll':145,
@@ -113,28 +113,28 @@ shortcut = {
 				'numlock':144,
 				'num_lock':144,
 				'num':144,
-				
+
 				'pause':19,
 				'break':19,
-				
+
 				'insert':45,
 				'home':36,
 				'delete':46,
 				'end':35,
-				
+
 				'pageup':33,
 				'page_up':33,
 				'pu':33,
-	
+
 				'pagedown':34,
 				'page_down':34,
 				'pd':34,
-	
+
 				'left':37,
 				'up':38,
 				'right':39,
 				'down':40,
-	
+
 				'f1':112,
 				'f2':113,
 				'f3':114,
@@ -148,19 +148,19 @@ shortcut = {
 				'f11':122,
 				'f12':123
 			}
-	
-			var modifiers = { 
+
+			var modifiers = {
 				shift: { wanted:false, pressed:false},
 				ctrl : { wanted:false, pressed:false},
 				alt  : { wanted:false, pressed:false},
 				meta : { wanted:false, pressed:false}	//Meta is Mac specific
 			};
-                        
+
 			if(e.ctrlKey)	modifiers.ctrl.pressed = true;
 			if(e.shiftKey)	modifiers.shift.pressed = true;
 			if(e.altKey)	modifiers.alt.pressed = true;
 			if(e.metaKey)   modifiers.meta.pressed = true;
-                        
+
 			for(var i=0; k=keys[i],i<keys.length; i++) {
 				//Modifiers
 				if(k == 'ctrl' || k == 'control') {
@@ -179,7 +179,7 @@ shortcut = {
 					modifiers.meta.wanted = true;
 				} else if(k.length > 1) { //If it is a special key
 					if(special_keys[k] == code) kp++;
-					
+
 				} else if(opt['keycode']) {
 					if(opt['keycode'] == code) kp++;
 
@@ -187,25 +187,25 @@ shortcut = {
 					if(character == k) kp++;
 					else {
 						if(shift_nums[character] && e.shiftKey) { //Stupid Shift key bug created by using lowercase
-							character = shift_nums[character]; 
+							character = shift_nums[character];
 							if(character == k) kp++;
 						}
 					}
 				}
 			}
-			
-			if(kp == keys.length && 
+
+			if(kp == keys.length &&
 						modifiers.ctrl.pressed == modifiers.ctrl.wanted &&
 						modifiers.shift.pressed == modifiers.shift.wanted &&
 						modifiers.alt.pressed == modifiers.alt.wanted &&
 						modifiers.meta.pressed == modifiers.meta.wanted) {
 				callback(e);
-	
+
 				if(!opt['propagate']) { //Stop the event
 					//e.cancelBubble is supported by IE - this will kill the bubbling process.
 					e.cancelBubble = true;
 					e.returnValue = false;
-	
+
 					//e.stopPropagation works in Firefox.
 					if (e.stopPropagation) {
 						e.stopPropagation();
@@ -216,8 +216,8 @@ shortcut = {
 			}
 		}
 		this.all_shortcuts[shortcut_combination] = {
-			'callback':func, 
-			'target':ele, 
+			'callback':func,
+			'target':ele,
 			'event': opt['type']
 		};
 		//Attach the function with the event
@@ -256,7 +256,7 @@ shortcut = {
 
 
 	//Local version
-	var versionLocal = "0.2.0";
+	var versionLocal = "0.2.1";
 
 	// When page have loaded
 	$(document).ready(function() {2
@@ -284,7 +284,7 @@ shortcut = {
 	<p>Detta är inställningar som har med designen att göra</p>\
 	<input type="checkbox" id="removeTop"/> Ta bort topp<br/>\
 	<input type="checkbox" id="floatingTabs"/> Meny-rad följer scroll<br/>\
-	<input type="checkbox" id="hetaAmnenMod"/> Heta Ämnen-väljare<br/>\
+	<input type="checkbox" id="hetaAmnenMod"/> Aktuella Ämnen-väljare<br/>\
 	</div>\
 	<div id="tab-3" style="float: left; margin-left: 5px;">\
 	<h1 style="font-weight: bolder; font-size: 120%;">Uppdateringar</h1>\
@@ -300,6 +300,7 @@ shortcut = {
 	<input type="checkbox" id="fixLinks"/> Fixa utgående länkar<br/>\
 	<input type="checkbox" id="myPostInThread"/> Visa länk till alla mina inlägg i nuvarande tråd<br/>\
 	<input type="checkbox" id="showImages" title="Du måste använda fixLinks tillsammans med showImages"/> Visa bilder<br/>\
+	<input type="checkbox" id="showImagesMinDup"/> Visa dublettbilder i minatyr<br/>\
 	<input type="checkbox" id="keyShorts"/> Aktivera tangentbords-styrning<br/>\
 	<input type="checkbox" id="goToTop"/> Aktivera "Gå till toppen"-länk vid inlägg<br/>\
 	</div>\
@@ -316,7 +317,7 @@ shortcut = {
 	$('#tabs div:first').show();
 	$('#tabs ul li:first').addClass('active');
 	$('#tabs ul li:first').css('font-weight', 'bolder');
-	 
+
 	$('#tabs ul li a').click(function(){
 		$('#tabs ul li').css('font-weight','');
 		$('#tabs ul li').removeClass('active');
@@ -329,13 +330,13 @@ shortcut = {
 	});
 
 		//Add mod toolbox href
-		$('.top-menu-sub').append('<li class="l2"><a href="#" id="openToolboxSettings">Fullback</a></li>');
+		$('.top-menu-main').append('<li class="l1"><a href="#" id="openToolboxSettings">Fullback</a></li>');
 
 		//Intro popup
 		if($.cookie('intro') == null) {
 			if(debug)
 				console.log('Första gången');
-			var controlPosition = $('ul.top-menu-main li.l0').offset();
+			var controlPosition = $('#openToolboxSettings').offset();
 			var controlLeft = controlPosition.left - 30;
 			if(debug)
 				console.log(controlPosition);
@@ -367,16 +368,18 @@ shortcut = {
 		if($.cookie('fixLinks') == "true")
 			$('#fixLinks').attr('checked','checked');
 		if($.cookie('myPostInThread') == "true")
-			$('#myPostInThread').attr('checked','checked');	
+			$('#myPostInThread').attr('checked','checked');
 		if($.cookie('hetaAmnenMod') == "true")
-			$('#hetaAmnenMod').attr('checked','checked');	
+			$('#hetaAmnenMod').attr('checked','checked');
 		if($.cookie('showImages') == "true")
-			$('#showImages').attr('checked','checked');	
+			$('#showImages').attr('checked','checked');
+		if($.cookie('showImagesMinDup') == "true")
+			$('#showImagesMinDup').attr('checked','checked');
 		if($.cookie('keyShorts') == "true")
 			$('#keyShorts').attr('checked','checked');
 		if($.cookie('goToTop') == "true")
 			$('#goToTop').attr('checked','checked');
-			
+
 
 		//Remove #top
 		if($.cookie('removeTop') == "true")
@@ -482,7 +485,7 @@ shortcut = {
 			currentPage = currentPage.substring(0,2);
 			if((currentPage == "/p") || (currentPage == "/t")) {
 				var threadId = $('.navbar strong a:first').attr('href').substring(2);
-				var profileId = $('.top-menu-sub li:nth-child(2) a').attr('href').substring(2);
+				var profileId = $('.top-menu-main li.l0 .top-menu-sub li.l2:nth-child(2) a').attr('href').substring(2);
 				if(debug) {
 					console.log('Current threadId: '+threadId);
 					console.log('Current profileId: '+profileId);
@@ -490,40 +493,59 @@ shortcut = {
 				$('tr[valign^="bottom"]:last').prepend('<td class="alt1" style="white-space:nowrap;padding:0 !important;"><a href="https://www.flashback.org/find_posts_by_user.php?userid='+profileId+'&threadid='+threadId+'" class="doaction">Mina inlägg i denna tråd</a></td>');
 			}
 		}
-		//Enables users to mod heta-amnen
+		//Enables users to mod aktuella-amnen
 		if($.cookie('hetaAmnenMod') == "true") {
 			if(debug)
-				console.log('Heta amnen mod active');
+				console.log('Aktuella amnen mod active');
 			var currentPage = location.pathname;
-			if(currentPage == "/heta-amnen"){
-				var hetaAmnenModVar = 'Kryssa i de kategorier du vill visa.\
-					<input type="checkbox" id="aktuellt" class="hetaAmnenMod" checked="checked"/>Aktuella händelser\
+			if(currentPage == "/aktuella-amnen"){
+				var hetaAmnenModVar = '<p>Kryssa i de kategorier du vill visa.</p>\
+					<input type="checkbox" id="nyheter" class="hetaAmnenMod" checked="checked"/>Nyheter\
 					<input type="checkbox" id="ovrigt" class="hetaAmnenMod" checked="checked"/>Övriga\
-					<input type="checkbox" id="aldre" class="hetaAmnenMod" checked="checked"/>äldre än en månad\
+					<input type="checkbox" id="aldre_vecka" class="hetaAmnenMod" checked="checked"/>Äldre än en vecka\
+					<input type="checkbox" id="aldre_ar" class="hetaAmnenMod" checked="checked"/>Äldre än ett år\
 				<hr/>';
 
-				$('div[style="padding-top:10px"]').prepend(hetaAmnenModVar);
-				
-				if($.cookie('aktuellt') == "false") {
-					$('#aktuellt').attr('checked',null);
-					$('#threadslist:nth-child(1)').hide();
+				$(hetaAmnenModVar).insertBefore('table.threadslist:first');
+
+				if($.cookie('nyheter') == "false") {
+					$('#nyheter').attr('checked',null);
+					$('table.threadslist:eq(0)').hide();
 				}
 				if($.cookie('ovrigt') == "false"){
 					$('#ovrigt').attr('checked',null);
-					$('#threadslist:nth-child(2)').hide();
+					$('table.threadslist:eq(1)').hide();
 				}
-				if($.cookie('aldre') == "false"){
-					$('#aldre').attr('checked',null);
-					$('#threadslist:nth-child(3)').hide();
+				if($.cookie('aldre_vecka') == "false"){
+					$('#aldre_vecka').attr('checked',null);
+					$('table.threadslist:eq(2)').hide();
+				}
+				if($.cookie('aldre_ar') == "false"){
+					$('#aldre_vecka').attr('checked',null);
+					$('table.threadslist:eq(3)').hide();
 				}
 			}
 		}
-		//Show images in threads 
+		//Show images in threads
 		if($.cookie('showImages') == "true") {
 			if($.cookie('fixLinks') == "true") {
 				//alt1 post-right
 				var maxWidth = $('.post-right').width() - 20;
+				var seen = {};
 				$('a[href$="jpg"], a[href$="jpeg"], a[href$="png"], a[href$="gif"], a[href$="JPG"]').each(function() {
+
+					if( $.cookie('showImagesMinDup') == "true" && seen[$(this).attr('href')] ) {
+						if(debug)
+							console.log("Ignored duplicate");
+						$(this).html('<br/><img src="'+$(this).attr('href')+'" style="max-width: 50px;"/>').click({"url": $(this).attr('href')}, function(e) {
+							e.preventDefault();
+							$(this).find('img').css({"max-width": maxWidth+'px'}).click(function() {
+								window.open(e.data["url"]);
+							});
+						});
+						return true;
+					}
+
 					if(debug)
 						console.log($(this).css('color'));
 
@@ -533,10 +555,11 @@ shortcut = {
 					} else {
 						if(debug)
 							console.log('True '+$(this).attr("href"));
-						$(this).html('<br/><a href="'+$(this).attr('href')+'" target="_blank"><img src="'+$(this).attr('href')+'" style="max-width: '+maxWidth+'px;"/></a>'); 
+						$(this).html('<br/><a href="'+$(this).attr('href')+'" target="_blank"><img src="'+$(this).attr('href')+'" style="max-width: '+maxWidth+'px;"/></a>');
 						if(debug)
 							console.log('Fixed image link!'+$(this).attr('href'));
 					}
+					seen[$(this).attr('href')] = true;
 				});
 			}
 		}
@@ -630,8 +653,8 @@ shortcut = {
 			if(debug)
 				console.log('Mod Toolbox settings dialog opened');
 			$('body').css('overflow', 'hidden');
-			$('#backgroundCover').fadeIn('Slow', function(){
-				$('#settingsDialog').fadeIn('Slow');
+			$('#backgroundCover').fadeIn('fast', function(){
+				$('#settingsDialog').fadeIn('fast');
 			});
 		});
 
@@ -690,25 +713,30 @@ shortcut = {
 			} else {
 				$.cookie('showImages', 'false', { expires: 1000 });
 			}
+			if ($('#showImagesMinDup').attr('checked')) {
+				$.cookie('showImagesMinDup', 'true', { expires: 1000 });
+			} else {
+				$.cookie('showImagesMinDup', 'false', { expires: 1000 });
+			}
 			if ($('#keyShorts').attr('checked')) {
 				$.cookie('keyShorts', 'true', { expires: 1000 });
 			} else {
 				$.cookie('keyShorts', 'false', { expires: 1000 });
-			} 
+			}
 			if ($('#goToTop').attr('checked')) {
 				$.cookie('goToTop', 'true', { expires: 1000 });
 			} else {
 				$.cookie('goToTop', 'false', { expires: 1000 });
 			}
 
-			$('#settingsDialog').fadeOut('Slow', function(){
-				$('#backgroundCover').fadeOut('Slow', function(){
+			$('#settingsDialog').fadeOut('fast', function(){
+				$('#backgroundCover').fadeOut('fast', function(){
 					$('body').css('overflow', 'auto');
 					location.reload();
 				});
 			});
 			if(debug)
-				console.log('Save and exit!');	
+				console.log('Save and exit!');
 		});
 
 		$(".hetaAmnenMod").change( function(){
@@ -717,43 +745,50 @@ shortcut = {
 			if($(this).is(':checked')) {
 				if(debug)
 					console.log('Checked '+hetaAmnenModCheckbox);
-				
+
 				switch(hetaAmnenModCheckbox)
 				{
-				case "aktuellt":
-					$.cookie('aktuellt', 'true');
-					$('#threadslist:nth-child(1)').show();
+				case "nyheter":
+					$.cookie('nyheter', 'true');
+					$('table.threadslist:eq(0)').show();
 					break;
 				case "ovrigt":
 					$.cookie('ovrigt', 'true');
-					$('#threadslist:nth-child(2)').show();
+					$('table.threadslist:eq(1)').show();
 					break;
-				case "aldre":
-					$.cookie('aldre', 'true');
-					$('#threadslist:nth-child(3)').show();
+				case "aldre_vecka":
+					$.cookie('aldre_vecka', 'true');
+					$('table.threadslist:eq(2)').show();
+					break;
+				case "aldre_ar":
+					$.cookie('aldre_ar', 'true');
+					$('table.threadslist:eq(3)').show();
 					break;
 				default:
 					if(debug)
 						console.log('Fel i hetaAmnenMod');
 				}
-				window.scrollTo(0, document.body.scrollHeight);
 			} else {
 				if(debug)
 					console.log('Unchecked '+hetaAmnenModCheckbox);
-				
+
 				switch(hetaAmnenModCheckbox)
 				{
-				case "aktuellt":
-					$.cookie('aktuellt', 'false');
-					$('#threadslist:nth-child(1)').hide();
+				case "nyheter":
+					$.cookie('nyheter', 'false');
+					$('table.threadslist:eq(0)').hide();
 					break;
 				case "ovrigt":
 					$.cookie('ovrigt', 'false');
-					$('#threadslist:nth-child(2)').hide();
+					$('table.threadslist:eq(1)').hide();
 					break;
-				case "aldre":
-					$.cookie('aldre', 'false');
-					$('#threadslist:nth-child(3)').hide();
+				case "aldre_vecka":
+					$.cookie('aldre_vecka', 'false');
+					$('table.threadslist:eq(2)').hide();
+					break;
+				case "aldre_ar":
+					$.cookie('aldre_ar', 'false');
+					$('table.threadslist:eq(3)').hide();
 					break;
 				default:
 					if(debug)
@@ -763,14 +798,16 @@ shortcut = {
 		});
 
 		$('#forceCloseToolboxSettings').click(function(){
-			$('#settingsDialog').fadeOut('Slow', function(){
-				$('#backgroundCover').fadeOut('Slow', function(){
+			$('#settingsDialog').fadeOut('fast', function(){
+				$('#backgroundCover').fadeOut('fast', function(){
 					$('body').css('overflow', 'auto');
 				});
 			});
 		});
 
 		//Check if there is any updates
+		// Tries to parse the forum - very brittle and the current post is not what this code expects.
+		/*
 		$.ajax({
 		     url:"https://www.flashback.org/u180540",
 		     success:function(versionRemote){
@@ -788,6 +825,7 @@ shortcut = {
 		        }
 	 	     }
 		});
+		*/
 	});
 }
 
